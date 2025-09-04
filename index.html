@@ -90,9 +90,9 @@
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased flex flex-col min-h-screen">
 
-    <div class="md:flex flex-1 min-h-screen">
+    <div class="md:flex flex-1">
         <!-- Mobile Header -->
         <div class="md:hidden bg-white/80 backdrop-blur-md sticky top-0 z-40 shadow-sm flex justify-between items-center px-4 py-3">
             <h1 class="text-xl font-bold text-slate-800">后验网络解析</h1>
@@ -283,7 +283,7 @@
                             <h4 class="text-xl font-semibold text-slate-700 mt-6 mb-2">5.3.1 极限情况1：分布内数据 (密度 <span class="math-inline" data-expr="\to \infty"></span>)</h4>
                             <p class="text-lg leading-relaxed text-slate-600">当输入是一个非常典型的ID样本时，其总密度 <span class="math-inline" data-expr="P(z^{(i)}; \phi)"></span> 会非常大。此时，先验项可以被忽略，公式近似为：<span class="math-inline" data-expr="\mathbb{E}[p_c] \approx P(c|z^{(i)}; \phi)"></span>。这意味着，对于熟悉的ID数据，模型的预测概率会收敛到真实的类别后验概率，表现出高置信度，认知不确定性消失。</p>
                             <h4 class="text-xl font-semibold text-slate-700 mt-6 mb-2">5.3.2 极限情况2：分布外数据 (密度 <span class="math-inline" data-expr="\to 0"></span>)</h4>
-                             <p class="text-lg leading-relaxed text-slate-600">当输入是一个OOD样本时，其总密度 <span class="math-inline" data-expr="P(z^{(i)}; \phi)"></span> 会趋近于零。此时，数据驱动项可以被忽略，公式退化为：<span class="math-inline" data-expr="\mathbb{E}[p_c] \approx \frac{\beta_c^{\text{prior}}}{\sum_c \beta_c^{\text{prior}}}"></span>。如果设置一个平坦的先验（例如 <span class="math-inline" data-expr="\beta_c^{\text{prior}} = 1"></span>），那么预测概率将收敛到一个均匀分布 <span class="math-inline" data-expr="\frac{1}{C}"></span>。这意味着模型会优雅地“承认无知”，表现出极高的认知不确定性。</p>
+                             <p class="text-lg leading-relaxed text-slate-600">当输入是一个OOD样本时，其总密度 <span class="math-inline" data-expr="P(z^{(i)}; \phi)"></span> 会趋近于零。此时，数据驱动项可以被忽略，公式退化为：<span class="math-inline" data-expr="\mathbb{E}[p_c] \approx \beta_c^{\text{prior}} / \sum_c \beta_c^{\text{prior}}"></span>。如果设置一个平坦的先验（例如 <span class="math-inline" data-expr="\beta_c^{\text{prior}} = 1"></span>），那么预测概率将收敛到一个均匀分布 <span class="math-inline" data-expr="1/C"></span>。这意味着模型会优雅地“承认无知”，表现出极高的认知不确定性。</p>
                             <div class="overflow-x-auto">
                                <h4 class="text-xl font-semibold my-4 text-slate-700">表2：PostNet预测与不确定性的渐进行为</h4>
                                 <table>
@@ -305,7 +305,7 @@
                                          <tr>
                                             <td>分布外 (OOD)</td>
                                             <td>先验项 (<span class="math-inline" data-expr="\beta^{\text{prior}}"></span>)</td>
-                                            <td><span class="math-inline" data-expr="\frac{1}{C}"></span> (均匀分布)</td>
+                                            <td><span class="math-inline" data-expr="1/C"></span> (均匀分布)</td>
                                             <td>趋近于最大值</td>
                                         </tr>
                                     </tbody>
@@ -401,6 +401,15 @@
             </section>
         </main>
     </div>
+
+    <footer class="text-center py-6 mt-auto border-t border-slate-200 bg-white">
+        <p class="text-slate-500">
+            By 
+            <a href="https://github.com/droggeljugLM" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+                Droggeljug
+            </a>
+        </p>
+    </footer>
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {
